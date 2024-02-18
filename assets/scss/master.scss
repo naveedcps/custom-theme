@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Compass Utilities
+   ========================================================================== */
+
+   // @import "compass/reset";
+   // @import "compass/css3";
+   // @import "compass/utilities/general/clearfix";
+   @import "normalize";
+   
+   /* ==========================================================================
+      Load our SASS variables and mixins
+      ========================================================================== */
+   
+   @import "variables";
+   @import "functions";
+   @import "mixins";
+     
+   
+   /* ==========================================================================
+      Load vendor styles
+      ========================================================================== */
+      
+   // Slick slider
+   @import "vendor/slick.scss";
+   @import "vendor/slick-theme.scss";
+   
+   
+   /* ==========================================================================
+      Load our theme-specific responsive (mobile-first) styles
+      ========================================================================== */
+      
+   // Base styles (load on all devices)
+   @import "base";
+   
+   // Small device styles (typically loaded on tablet-sized devices and up)
+    @media (min-width: $breakpoint-xsmall) {
+      @import "xsmall";
+    }
+   
+   
+   // Small device styles (typically loaded on tablet-sized devices and up)
+   @media (min-width: $breakpoint-small) {
+     @import "small";
+   }
+   
+   // Medium device styles (typically loaded on laptop-sized devices and up)
+   @media (min-width: $breakpoint-medium) {
+     @import "medium";
+   }
+   
+   // Large device styles (typically loaded on desktop monitors)
+   @media (min-width: $breakpoint-large) {
+     @import "large";
+   }
+   
+   @media (min-width: $breakpoint-xlarge) {
+      @import "xlarge";
+    }
+    

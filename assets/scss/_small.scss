@@ -1,0 +1,284 @@
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
+/**** Global Header ****/
+
+header.global{
+  .header-inner{
+    .container{
+      form{
+        position: static;
+        max-width: 56%;
+      }
+    }
+  }
+}
+
+/**** Global Page Elements ****/
+
+#cta{
+  .container{
+    .inner{
+      padding: 90px 75px 80px;
+      background-size: 210px;
+    }
+  }
+}
+
+#faq{
+  .container{
+    .faq-box{
+      .left{
+        width: calc(46% - 40px);
+
+        h2{
+          max-width: 380px;
+        }
+      }
+
+      .accordion{
+        width: calc(54% - 40px);
+      }
+    }
+  }
+}
+
+/**** Global Footer ****/
+
+footer.global{
+   .container{
+     .inner{
+       >div{
+         &.footer-bottom{
+           @include flex();
+           @include align-items(center);
+           @include justify-content(space-between);
+ 
+           p{
+             margin-bottom: 0;
+           }
+         }
+       }
+     }
+   }
+ }
+
+/* ==========================================================================
+   Default Page Template
+   ========================================================================== */
+   
+   
+   
+/* ==========================================================================
+   Homepage Template
+   ========================================================================== */
+
+   #resources{
+    .container{
+      .inner{
+        .links-wrapper{
+          width: calc(50% - 56px);
+        }
+      }
+    }
+  }
+
+
+  #contact-wrapper{
+    .container{
+      header{
+        max-width: calc(100% - 358px);
+      }
+
+      .inner{
+        .content{
+          width: calc(100% - 358px);
+          margin-bottom: 0;
+        }
+  
+        .info{
+          width: 358px;
+          padding-left: 40px;
+        }
+      }
+    }
+  }
+
+  .tiles{
+    .tile{
+      width: calc(50% - 24px);
+    }
+  }
+
+  .page-template-home{
+    #hero{
+      .bg-gradient{
+        height: 640px;
+        width: 65%;
+      }
+  
+      .featured-items-slider{
+        .featured-item{
+          .content{
+            max-width: 432px;
+            padding-left: 20px;
+          }
+  
+          .img-wrap{
+            margin-top: 0;
+            width: 270px;
+            height: 270px;
+          }
+        }
+  
+        .slick-dots{
+          text-align: left;
+          padding-left: 20px;
+  
+          li{
+            button{
+              border: 1px solid $white;
+            }
+  
+            &.slick-active{
+              button{
+                background: $white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+   
+  
+  #popular-category{
+    .container{
+      .inner{
+        .category{
+          width: calc(33.33% - 24px);
+        }
+      }
+    }
+  }
+
+  #featured-products{
+    .container{
+      .products{
+        .product{
+          img{
+            height: 350px !important;
+          }
+        }
+      }
+    }
+  }
+
+  #trending-products{
+    .container{
+      .products{
+        .product{
+          width: calc(33.33% - 24px);
+        }
+      }
+    }
+  }
+
+/* ==========================================================================
+   Woocommerce Pages
+   ========================================================================== */
+
+  .woocommerce{
+    main{
+      >.container{
+        .product{
+          .woocommerce-product-gallery {
+            width: 48%;
+
+            .products-files{
+              margin-top: 64px;
+            }
+          }
+
+          >.images{
+            width: 48%;
+          }
+
+          .summary{
+            width: 48%;
+
+            h1.product_title {
+              @include font-size(48px);
+            }
+
+            .product-options{
+              .options{
+                .option{
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .related.products{
+    .products.columns-4{
+      .product{
+        width: calc(33.33% - 24px);
+      }
+    }
+  }
+
+  .woocommerce-products-header{
+    margin: 14px 0 100px;
+
+    h1{
+      @include font-size(36px);
+    }
+  }
+
+  .products-wrapper{
+    .shop-filters-wrap{
+      width: 270px;
+      padding-right: 40px;
+      display: block;
+
+      .shop-filters{
+        width: 270px;
+      }
+    }
+
+    .facetwp-template{
+      width: calc(100% - 310px);
+      margin-top: -138px;
+
+      .filter-toggle{
+        @include flex();
+        position: static;
+        margin-right: 35px;
+        
+        span{
+          &.hide{
+            display: inline-block;
+          }
+
+          &.show{
+            display: none;
+          }
+        }
+      }
+
+      .woocommerce-ordering{
+        width: auto;
+      }
+
+      .facetwp-selections{
+        height: 84px;
+      }  
+    }
+  }
+

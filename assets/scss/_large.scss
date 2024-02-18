@@ -1,0 +1,220 @@
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
+
+/**** Global Header ****/
+.admin-bar{
+  header.global{
+    .secondary-menu-wrap{ 
+      .secondary-nav{
+       height: auto;
+      }
+    }
+  }
+}
+
+header.global{
+  .top-bar{
+    .primary-menu-wrap{
+      nav.primary-nav{
+        >ul{
+          >li{
+            margin-left: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  .secondary-menu-wrap{
+    .container{
+      @include wrapper(0, 22px, $max-width-large);
+
+      nav.secondary-nav{
+        display: block !important;
+        position: relative;
+        background: transparent;
+        height: auto;
+        @include flex-direction(row);
+        flex-grow: 1;
+        top: 0;
+
+        >ul{
+          @include flex();
+          @include align-items(center);
+          @include justify-content(center);
+          padding: 0;
+
+          >li{
+            margin: 0 28px;
+
+            >a{
+              @include font-size(14px);
+              font-weight: $semibold;
+              color: $primary-font-color;
+              text-transform: capitalize;
+              @include transition(0.3s);
+              padding: 0;
+              &:hover{
+                color: $secondary-font-color;
+              }
+            }
+          }
+        }
+      }
+
+      .shop-now{
+        display: none;
+      }
+
+      #mobile-menu-toggle{
+        display: none;
+      }
+    }
+  }
+}
+
+/**** Global Page Elements ****/
+
+
+/**** Global Footer ****/
+
+
+
+/* ==========================================================================
+   Default Page Template
+   ========================================================================== */
+   
+   
+   
+/* ==========================================================================
+   Homepage Template
+   ========================================================================== */
+
+   #contact-wrapper{
+      .container{
+        .inner{
+          .content{ 
+            .form-wrapper{
+              form{
+                .gform_fields{
+                  .gfield{
+                    .ginput_container_fileupload{
+                      input[type="file"]{
+                        cursor: pointer;
+                        padding-left: 55px;
+                        padding-bottom: 24px;
+                      }
+    
+                      .gform_fileupload_rules{
+                        right: 24px;
+                        left: auto;
+                        top: 50%;
+                      }
+    
+                      &:before{
+                        top: 50%;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #cta{
+      .container{
+        .inner{
+          background-size: contain;
+          background-position: left center;
+        }
+      }
+    }
+
+    .page-template-home{
+      #hero{
+        .bg-gradient{
+          height: 900px;
+        }
+
+        .featured-items-slider{
+          .featured-item{
+            .img-wrap{
+              width: 380px;
+              height: 380px;
+            }
+          }
+        }
+      }
+    }
+
+    #trending-products{
+      .container{
+        .products{
+          .product{
+            width: calc(25% - 24px);
+  
+            .content{
+              height: calc(100% - 246px);
+            }
+
+            .img-wrap{
+              img{
+                height: 220px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+/* ==========================================================================
+   Woocommerce Pages
+   ========================================================================== */
+
+  //  .woocommerce{
+  //   main{
+  //     >.container{
+  //       .product{
+  //         .summary {
+  //           .product-options{
+  //             .options{
+  //               .option{
+  //                 width: calc(25% - 16px);
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  .related.products{
+    .products.columns-4{
+      .product{
+        width: calc(25% - 24px);
+      }
+    }
+  }
+
+  .products-wrapper{
+    .shop-filters-wrap{
+      padding-right: 72px;
+    }
+
+    .facetwp-template{
+      width: calc(100% - 342px); 
+
+      .products{
+        .product{
+          width: calc(33.33% - 24px) !important;
+        }
+      }
+    }
+  }

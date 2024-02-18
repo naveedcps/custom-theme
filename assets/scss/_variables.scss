@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+   
+   
+/**** Wrapper Widths ****/
+$max-width-xsmall: 576px;
+$max-width-small: 792px;
+$max-width-medium: 960px;
+$max-width-large: 1200px;
+$max-width-xlarge: 1360px;
+
+/**** Padding ****/
+$default-padding: 32px;
+   
+
+/**** Breakpoints ****/
+$breakpoint-xsmall: $max-width-xsmall + ($default-padding*2);
+$breakpoint-small: $max-width-small + ($default-padding*2);
+$breakpoint-medium: $max-width-medium + ($default-padding*2);
+$breakpoint-large: $max-width-large + ($default-padding*2);
+$breakpoint-xlarge: $max-width-xlarge + ($default-padding*2);      
+
+
+/**** Fonts ****/
+
+/* Font Families */
+$primary-font-family: 'Lato', sans-serif;
+
+/* Font Sizes */
+$base-font-size: 16px; // Base size - enter in pixel units. All subsequent declarations should be relative units.
+// See functions.scss file
+
+/* Font Weights */
+// Optionally override defaults for normal/bold, as well as specify additional weights
+$normal: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$boldblack: 900;
+
+
+/**** Colors ****/
+
+/* Color Palette */
+$white : #ffffff;
+$off-white : #f7f7f7;
+$tan: #F9F8F6; 
+$black: #000;
+$off-black: #323232;
+$darkorange: #D63924;
+$lightorange:#E27466;
+$brown: #962819;
+$lightgrey: #D9D9D9;
+$teal: #266979;
+$lightteal: #598c99;
+$darkteal: #134d5a;
+$grey: #666;
+$blue: #007bff;
+// $green ;
+// $blue ;
+
+
+/* Color Usage */
+$primary-accent-color: $black;
+$secondary-accent-color: $darkorange;
+$tertiary-accent-color: $darkorange;
+
+$primary-font-color: $black;
+$secondary-font-color: $darkorange;
+$tertiary-font-color: $teal;

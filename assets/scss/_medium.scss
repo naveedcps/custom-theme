@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
+/**** Global Header ****/
+.admin-bar{
+  header.global{
+    .secondary-menu-wrap{ 
+      .secondary-nav{
+        height: calc(100vh - 260px);
+
+        @media screen and (min-width:783px){
+          height: calc(100vh - 246px);
+        }
+      }
+    }
+  }
+}
+
+
+header.global{
+  .top-bar{
+    @include flex-direction(row);
+    
+    >p{
+      @include font-size($base-font-size);
+    }
+
+    .primary-menu-wrap{
+      position: absolute;
+      right: 32px;
+
+      nav.primary-nav{
+        >ul{
+          >li{
+            margin: 0;
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .secondary-menu-wrap{
+    .container{
+      nav.secondary-nav{
+        top: 214px;
+        height: calc(100vh - 214px);
+      }
+    }
+  }
+}
+
+/**** Global Page Elements ****/
+
+
+/**** Global Footer ****/
+
+footer.global{
+   .container{
+     .inner{
+       >div{
+         width: 25%;
+ 
+         &.company{
+           width: 16%;
+         }
+ 
+         &.info{
+           width: 34%;
+         }
+ 
+         &.menu{
+           margin-top: 60px;
+         }
+       }
+     }
+   }
+ }
+
+/* ==========================================================================
+   Default Page Template
+   ========================================================================== */
+   
+  .page-template-home{
+    #hero{
+      .bg-gradient{
+        width: 62%;
+        height: 700px;
+      }
+  
+      .featured-items-slider{
+        .featured-item{
+          .content{
+            max-width: 432px;
+            padding-left: 80px;
+  
+            span{
+              @include overline($white);
+            }
+  
+            h2{
+              margin-bottom: 40px;
+            }
+          }
+  
+          .img-wrap{
+            width: 350px;
+            height: 350px;
+          }
+        }
+  
+        .slick-dots{
+          padding-left: 80px;
+        }
+      }
+    }
+  }
+   
+   
+/* ==========================================================================
+   Homepage Template
+   ========================================================================== */
+
+   #contact-wrapper{
+    .container{
+      header{
+        max-width: calc(100% - 456px);
+      }
+
+      .inner{
+        .content{
+          width: calc(100% - 456px);
+        }
+  
+        .info{
+          width: 456px;
+          padding-left: 138px;
+        }
+      }
+    }
+   }
+
+   #cta{
+    .container{
+      .inner{
+        background-size: 320px;
+      }
+    }
+   }
+
+  #about{
+    .container{
+      .inner{
+        height: 600px;
+      }
+    }
+  }
+
+   #popular-category{
+    .container{
+      .inner{
+        .category{
+          img{
+            height: 480px !important;
+          }
+        }
+      }
+    }
+  }
+
+  #featured-products{
+    .container{
+      .products{
+        .product{
+          img{
+            height: 419px !important;
+          }
+        }
+      }
+    }
+  }
+
+  #trending-products{
+    .container{
+      .products{
+        .product{
+          .content{
+            height: calc(100% - 286px);
+          }
+
+          .img-wrap{
+            img{
+              height: 260px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+/* ==========================================================================
+   Woocommerce Pages
+   ========================================================================== */
+
+  .woocommerce{
+    main{
+      >.container{
+        .product{
+          .summary {
+            .product-options{
+              .options{
+                .option{
+                  width: calc(50% - 16px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .woocommerce-cart{
+    .woocommerce{
+      form{
+        width: 63%;
+        order: 2;
+      }
+
+      .cart-collaterals {
+        width: 34%;
+        order: 3;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .register-wrapper {
+    .container {
+      .inner{
+        form{
+          .gform_fields{
+            .gfield{
+              .ginput_container_fileupload{
+                input[type="file"]{
+                  cursor: pointer;
+                  padding-left: 55px;
+                  padding-bottom: 24px;
+                }
+
+                .gform_fileupload_rules{
+                  right: 24px;
+                  left: auto;
+                  top: 50%;
+                }
+
+                &:before{
+                  top: 50%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

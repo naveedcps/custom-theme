@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
+
+/**** Layout ****/
+
+// Wrapper mixin
+@mixin wrapper($margin, $padding, $max-width: $max-width-wide, $border-box: false) {
+	width: calc(100% - (#{$default-padding}*2));
+	max-width: $max-width;
+	margin: $margin;
+	margin-left: auto;
+	margin-right: auto;
+	padding: $padding;
+	padding-left: $default-padding;
+	padding-right: $default-padding;
+	
+	@if $border-box {
+  	@include box-sizing(border-box);
+	}
+}
+
+// Grid
+@mixin grid($columns: auto, $vmargin: 40px, $hmargin: $vmargin, $nowrap: false) {
+  $vmargin: $vmargin / 2;
+  $hmargin: $hmargin / 2;  
+  
+  @include display-flex();
+  @include flex-wrap(wrap);
+  list-style: none;
+  margin: -#{$vmargin} -#{$hmargin};
+  font-size: 0;
+  
+  & > * {
+    @include flex(1 0 0);
+    @include box-sizing(border-box);
+    position: relative;
+    margin: $vmargin $hmargin;
+    @include font-size($base-font-size);
+    line-height: 1em;
+  }
+  
+  @if $columns != auto {
+    & > * {
+      @include flex(0 0 calc(100% - (#{$hmargin}*2)));
+    }
+    
+    @if $nowrap == false {
+      @if $columns > 1 {
+        @media (min-width: $breakpoint-small) {
+          & > * {
+            @include flex(0 0 calc(50% - (#{$hmargin}*2)));
+          }
+        }
+      }
+    
+      @if $columns > 2 {
+        @media (min-width: $breakpoint-medium) {
+          & > * {
+            @include flex(0 0 calc(33.33% - (#{$hmargin}*2)));
+          }
+        }
+      }
+    
+      @if $columns > 3 {
+        @media (min-width: $breakpoint-large) {
+          & > * {
+            @include flex(0 0 calc((100% / #{$columns}) - (#{$hmargin}*2)));
+          }
+        }
+      }
+    }
+    
+    @if $nowrap {
+      @media (min-width: $breakpoint-small) {
+        @include flex-wrap(nowrap);
+        
+        & > * {
+          @include flex(0 0 calc((100% / #{$columns}) - (#{$hmargin}*2)));
+        }
+      }
+    }
+  }
+}
+
+// Cover
+@mixin cover() {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// Pseudo Element
+@mixin pseudo-element($position: absolute, $z-index: 0) {
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;
+  position: $position;
+  z-index: $z-index;
+  
+  @if $position == absolute {
+    display: block;
+  }
+}
+
+// Text Columns
+@mixin text-columns($count, $gap) {
+  -webkit-column-count: $count;
+  -moz-column-count: $count;
+  column-count: $count;
+  -webkit-column-gap: $gap;
+  -moz-column-gap: $gap;
+  column-gap: $gap;
+}
+
+
+/**** Fonts ****/
+
+// Font size
+@mixin font-size($size) {
+  font-size: $size; //Fallback in px
+  font-size: calculate-rem($size);
+}
+
+// Headline Typography Defaults
+@mixin headline-typography-defaults() {
+  margin: 0;
+  margin-bottom: .5em;
+  line-height: 1.25em;
+  font-weight: $bold;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin primary-headline($size: 48px, $color: $primary-font-color) {
+  @include headline-typography-defaults();
+  font-family: $primary-font-family;
+  @include font-size(#{$size});
+  font-weight: $normal;
+  color: $color;
+}
+
+@mixin secondary-headline($size: 36px, $color: $primary-font-color) {
+  @include headline-typography-defaults();
+  font-family: $primary-font-family;
+  @include font-size(#{$size});
+  color: $color;
+}
+
+@mixin tertiary-headline($size: 32px, $color: $primary-font-color) {
+  @include headline-typography-defaults();
+  font-weight: $normal;
+  font-family: $primary-font-family;
+  @include font-size(#{$size});
+  color: $color;
+}
+
+@mixin quaternary-headline($size: $base-font-size, $color: inherit) {
+  @include headline-typography-defaults();
+  font-weight: $boldblack;
+  font-family: $primary-font-family;
+  @include font-size(#{$size});
+  color: $color;
+}
+
+// Subhead
+@mixin subhead($font-size: $base-font-size, $color: inherit) {
+  text-transform: uppercase;
+  font-family: $primary-font-family;
+  @include font-size($font-size);
+  line-height: 1em;
+  letter-spacing: 5px;
+  font-weight: $bold;
+  color: $color;
+}
+
+// Pullquote
+@mixin pullquote($color: inherit) {
+  font-family: $tertiary-font-family;
+  @include font-size(36px);
+  font-weight: $bold;
+  line-height: 1.25em;
+  color: $color;  
+}
+
+// Paragraph
+@mixin paragraph-typography-defaults() {
+  margin: 0;
+  margin-bottom: 1.5em;
+  line-height: 1.5em;
+  font-weight: $normal;
+  color: $primary-font-color;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Font Awesome
+@mixin font-awesome($icon, $icon-set: solid) {
+  content: $icon;
+  font: var(--fa-font-#{$icon-set});
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/**** Elements ****/
+
+// SVG Icons
+$data-svg-prefix: 'data:image/svg+xml;utf-8,';
+$icons: (
+  'arrow'      : '<svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 12.6143H28" stroke="%%COLOR%%" stroke-width="4" stroke-miterlimit="10"/><path d="M19 3.61426L28 12.6143L19 21.6143" stroke="%%COLOR%%" stroke-width="4" stroke-miterlimit="10" stroke-linecap="square"/></svg>',
+  'arrow-back' : '<svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 12.6143H2" stroke="%%COLOR%%" stroke-width="4" stroke-miterlimit="10"/><path d="M11 3.61426L2 12.6143L11 21.6143" stroke="%%COLOR%%" stroke-width="4" stroke-miterlimit="10" stroke-linecap="square"/></svg>',
+  'arrow-down' : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none"><path d="M7.98771 12.0123C7.72252 12.0122 7.4682 11.9068 7.28071 11.7193L3.28071 7.71929C3.09855 7.53069 2.99776 7.27808 3.00004 7.01589C3.00232 6.75369 3.10749 6.50288 3.29289 6.31747C3.4783 6.13206 3.72911 6.02689 3.99131 6.02461C4.25351 6.02234 4.50611 6.12313 4.69471 6.30529L7.98771 9.59829L11.2807 6.30529C11.373 6.20978 11.4833 6.1336 11.6053 6.08119C11.7273 6.02878 11.8585 6.00119 11.9913 6.00004C12.1241 5.99888 12.2558 6.02419 12.3787 6.07447C12.5016 6.12475 12.6132 6.199 12.7071 6.29289C12.801 6.38679 12.8753 6.49844 12.9255 6.62133C12.9758 6.74423 13.0011 6.87591 13 7.00869C12.9988 7.14147 12.9712 7.27269 12.9188 7.39469C12.8664 7.5167 12.7902 7.62704 12.6947 7.71929L8.69471 11.7193C8.50722 11.9068 8.25291 12.0122 7.98771 12.0123Z" fill="%%COLOR%%"/></svg>',
+  'search'     : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><g clip-path="url(#clip0_410_50)"><path d="M12.7 11.3C13.6 10.1 14.1 8.7 14.1 7.1C14.1 3.2 11 0 7.1 0C3.2 0 0 3.2 0 7.1C0 11 3.2 14.2 7.1 14.2C8.7 14.2 10.2 13.7 11.3 12.8L14.3 15.8C14.5 16 14.8 16.1 15 16.1C15.2 16.1 15.5 16 15.7 15.8C16.1 15.4 16.1 14.8 15.7 14.4L12.7 11.3ZM7.1 12.1C4.3 12.1 2 9.9 2 7.1C2 4.3 4.3 2 7.1 2C9.9 2 12.2 4.3 12.2 7.1C12.2 9.9 9.9 12.1 7.1 12.1Z" fill="%%COLOR%%"/></g><defs><clipPath id="clip0_410_50"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>',
+  'file'       : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 1V7H21L15 1Z" fill="%%COLOR%%"/><path d="M15 1V7H21" stroke="%%COLOR%%" stroke-width="2" stroke-miterlimit="10"/><path d="M15 1H3V23H21V7L15 1Z" stroke="%%COLOR%%" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/><path d="M7 7H11" stroke="%%COLOR%%" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/><path d="M7 12H17" stroke="%%COLOR%%" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/><path d="M7 17H17" stroke="%%COLOR%%" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/></svg>'
+  );
+
+// Background Icon
+@mixin bg-icon( $image_url: '' ) {
+  @if $image_url {
+    background-image: url($image_url);
+  }
+  
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+// Background Image
+@mixin bg-image( $image_url: '', $position: center center ) {
+  @if $image_url != '' {
+    background-image: url($image_url);
+  }
+  
+  background-position: $position;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+//box-sizing
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model; // Safari <= 5
+     -moz-box-sizing: $box-model; // Firefox <= 19
+          box-sizing: $box-model;
+}
+
+//border radius
+@mixin border-radius($pixel) {
+  border-radius: $pixel;
+}
+
+@mixin appearance ($value) {
+	-webkit-appearance: $value;
+	   -moz-appearance: $value;
+	        appearance: $value;
+}
+
+// Flex
+@mixin flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// Flex Flow Direction
+@mixin flex-direction($direction: row) {
+  @if $direction == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+       -moz-box-direction: reverse;
+       -moz-box-orient: horizontal;
+  } @else if $direction == column {
+    -webkit-box-direction: normal;
+     -webkit-box-orient: vertical;
+       -moz-box-direction: normal;
+        -moz-box-orient: vertical;
+  } @else if $direction == column-reverse {
+    -webkit-box-direction: reverse;
+      -webkit-box-orient: vertical;
+       -moz-box-direction: reverse;
+         -moz-box-orient: vertical;
+  } @else {
+     -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+        -moz-box-direction: normal;
+       -moz-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $direction;
+      -ms-flex-direction: $direction;
+          flex-direction: $direction;
+}
+
+// Flex Line Wrapping
+@mixin flex-wrap($value: nowrap) {
+  // No Webkit/FF Box fallback.
+  -webkit-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+
+// Flex Cross-axis Alignment
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+       -moz-box-align: start;
+       -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+       -moz-box-align: end;
+       -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+       -moz-box-align: $value;
+       -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+          align-items: $value;
+}
+
+// Flex Axis Alignment
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+       -moz-box-pack: start;
+       -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+       -moz-box-pack: end;
+       -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+       -moz-box-pack: justify;
+       -ms-flex-pack: justify;
+  } @else if $value == space-around {
+       -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+       -moz-box-pack: $value;
+       -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+          justify-content: $value;
+}
+
+// opacity
+@mixin opacity($opacity: 0.5) {
+  opacity: $opacity;
+  filter: alpha(opacity=$opacity*100);
+}
+
+//transition
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+// Button
+@mixin button($color: #fff, $bg: $tertiary-accent-color, $ghost: false) {
+  @include box-sizing(border-box);
+  display: inline-block;
+  padding: 16px 24px;
+  @include border-radius(4px);
+  @include font-size($base-font-size);
+  line-height: 1;
+  color: $color;
+  background: $bg;
+  @include transition(0.3s);
+  font-weight: $bold; 
+
+  // @if $ghost {
+  //   border: 2px solid $color;
+    
+  //   &:hover {
+  //     color: #fff;
+  //     background: $color;
+  //   }    
+  // } @else {
+     
+    
+    &:hover {
+      background: $lightorange;
+    }
+
+    &:focus{
+      background: $brown;
+    }
+  //}
+}
+
+// Link
+@mixin link($color: $color, $direction: forward, $arrow_visible: true, $btn: false) {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: $bold;
+  color: $color;
+  border: 0;
+  @include transition(.3s);
+
+  @if $direction == back {
+    
+    &:before {
+      @include pseudo-element(static);
+      width: 16px;
+      height: 16px;
+      @include bg-icon();
+      background-image: get-icon( 'arrow-back', $color );
+      margin: 0 6px 4px 0;
+      @include transition(.3s);
+    }
+    
+    &:hover:before {
+      transform: translateX(-3px);
+    }
+  }
+  
+  @if $direction == forward {
+    &:after {
+      @include pseudo-element(static);
+      width: 16px;
+      height: 16px;
+      @include bg-icon();
+      background-image: get-icon( 'arrow', $color );
+      margin: 0 0 2px 10px;
+      @include transition(.3s);
+      
+      @if $arrow_visible == false {
+        display: none;
+      }
+    }
+    
+    &:hover:after {
+      @include opacity(1);
+      transform: translateX(3px);
+    }
+
+    @if $btn == true {
+      border: 1px solid $color;
+      @include border-radius(4px);
+      padding: 16px 24px 14px;
+
+      &:hover{
+        color: $white;
+        border: 1px solid $lightorange;
+        background: $lightorange;
+
+        &:after{
+          background-image: get-icon( 'arrow', $white );
+        }
+      }
+
+      &:focus{
+        color: $white;
+        border: 1px solid $brown;
+        background: $brown;
+
+        &:after{
+          background-image: get-icon( 'arrow', $white );
+        }
+      }
+    }
+
+    @if $btn == false {
+      border: 0;
+    }
+  }
+}
+
+@mixin overline($color: $primary-font-color){
+  @include font-size(14px);
+  font-weight: $bold;
+  margin-bottom: 12px;
+  color: $color;
+  text-transform: uppercase;
+  letter-spacing: 1.5px; 
+  display: block;
+}
