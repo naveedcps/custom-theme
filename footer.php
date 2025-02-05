@@ -36,7 +36,7 @@ $copyright_text = get_field('copyright_text', 'options');
             </div> 
         </div>
     </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore vel optio reprehenderit rerum! Saepe fugit nisi iure tempora corporis? Explicabo, fugit suscipit. Qui numquam dicta tempore, aliquam hic rem eum.</p>
+    <p>Lorem ipsum dolor sit</p>
 </footer>
 <?php wp_footer(); ?> 
 
